@@ -74,6 +74,7 @@ gem "dockerfile-rails", ">= 1.2", :group => :development
 
 gem "faker", "~> 3.2"
 
-gem "dotenv", "~> 2.8"
 
 gem "mailjet", "~> 1.7"
+
+gem "dotenv-rails", "~> 2.8"
