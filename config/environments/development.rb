@@ -76,6 +76,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
 
+  config.action_mailer.delivery_method = :mailjet
+
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV['SENDGRID_LOGIN'],
     :password => ENV['SENDGRID_PWD'],

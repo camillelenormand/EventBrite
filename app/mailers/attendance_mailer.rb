@@ -5,9 +5,7 @@ class AttendanceMailer < ApplicationMailer
 
     @url = 'http://monsite.fr/login'
 
-    @event = Attendance.find_by(user_id: @user.id).event.title  
-
-    mail(to: @user.email, subject: 'Vous êtes inscrit!') 
+    mail(to: @user.email, subject: 'Vous êtes inscrit à l\'évènement !') 
 
   end
 end
