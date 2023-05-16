@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :check_if_current_user
 
   # GET /users or /users.json
   def index
@@ -68,5 +70,14 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.fetch(:user, {})
+    end
+
+    private
+
+    def check_if_current_user
+      unless current_user == @user
+        flash[:danger] = "You can't view this profile."
+        redirect_to root_path
+      end
     end
 end

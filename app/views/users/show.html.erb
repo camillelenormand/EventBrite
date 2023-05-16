@@ -41,14 +41,21 @@
   </div>
 
   <!-- Submit button -->
-  <%= link_to "Edit this user", edit_user_path(@user), class: "btn btn-primary btn-block mb-4" %><br>
-  <%= button_to "Delete my account", @user , class:"btn btn-danger", method: :delete %><br>
+  <div class="form-outline mb-4">
+    <%= link_to "Edit this user", edit_user_path(@user), class: "btn btn-primary btn-block mb-4" %><br>
+    <%= button_to "Delete my account", @user , class:"btn btn-danger btn-block mb-4", method: :delete %><br>
+    <%= link_to "Edit email or password", edit_user_registration_path,  class: "btn btn-info btn-block mb-4" %><br>
+  </div>
+
 <% end %>
 
+<!--Event List -->
 <h3>Events organized by <%=@user.first_name%></h3>
 <% @events.all.sort.each_with_index do | event, index |%>
-  <ul class="list-group list-group-light list-group-small">
-    <li class="list-group-item"><%=event.title%></li>
-    <li class="list-group-item"><%=link_to "Details", event_path(event.id)%></li>
-  </ul>
-  <% end %>
+  <div class="form-outline mb-4">
+    <ul class="list-group list-group-light list-group-small">
+      <li class="list-group-item"><%=event.title%></li>
+      <li class="list-group-item"><%=link_to "Details", event_path(event.id)%></li>
+    </ul>
+  </div>
+<% end %>
