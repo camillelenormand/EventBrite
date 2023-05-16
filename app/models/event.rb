@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   validates :description, presence: true, length: { minimum: 20, maximum: 1000 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 1000 }
   validates :location, presence: true
+  validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
 
   def divisible_by?(duration)
