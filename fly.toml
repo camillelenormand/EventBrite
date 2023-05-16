@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for event-brite on 2023-05-15T16:15:58+02:00
+# fly.toml app configuration file generated for event-brite on 2023-05-16T08:46:59+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -28,3 +28,4 @@ console_command = "/rails/bin/rails console"
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
+

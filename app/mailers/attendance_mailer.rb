@@ -1,9 +1,11 @@
 class AttendanceMailer < ApplicationMailer
 
-  def attendance_email(user)
+  def attendance_confirmation(user)
     @user = user
 
-    @url = 'http://monsite.fr/login'
+    @event = Event.find(params[:event_id])
+
+    @url = 'http://event-brite.fly.dev/login'
 
     mail(to: @user.email, subject: 'Vous êtes inscrit à l\'évènement !') 
 

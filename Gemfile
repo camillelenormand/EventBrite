@@ -78,3 +78,5 @@ gem "faker", "~> 3.2"
 gem "mailjet", "~> 1.7"
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "devise", "~> 4.9"

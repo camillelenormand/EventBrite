@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'static_pages/index'
+  get 'static_pages/secret'
+  devise_for :users
   resources :attendances
   resources :events
   resources :users
@@ -9,5 +12,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root to: "static_pages#index"
 end
