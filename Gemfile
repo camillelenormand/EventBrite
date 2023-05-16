@@ -80,3 +80,5 @@ gem "mailjet", "~> 1.7"
 gem "dotenv-rails", "~> 2.8"
 
 gem "devise", "~> 4.9"
+
+gem "letter_opener", "~> 1.8"
