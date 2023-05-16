@@ -1,10 +1,46 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @user %>
+<%= link_to "Back to users", users_path, class:"btn-block mb-4" %><br>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+<%= form_with url: user_path, method: :get do |form| %>
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <%= form.text_field :first_name, value: @user.first_name, readonly:true, class: "form-control" %>
+        <%= form.label :first_name, class: "form-label" do %>
+          First name
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <%= form.text_field :last_name, value: @user.last_name, readonly:true, class: "form-control" %>
+        <%= form.label :last_name, class: "form-label" do %>
+          Last name
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <%= form.text_field :description, value: @user.description, readonly:true, class: "form-control" %>
+    <%= form.label :description, class: "form-label" do %>
+      Description
+    <% end %>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <%= form.email_field :email, value: @user.email, readonly:true, class: "form-control" %>
+    <%= form.label :email, class: "form-label" do %>
+      Email
+    <% end %>
+  </div>
+
+  <!-- Submit button -->
+  <%= link_to "Edit this user", edit_user_path(@user), class: "btn btn-primary btn-block mb-4" %><br>
+  <%= button_to "Delete my account", @user , class:"btn btn-danger", method: :delete %><br>
+<% end %>
