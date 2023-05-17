@@ -1,5 +1,7 @@
 <%= form_with(model: attendance) do |form| %>
+
   <% if attendance.errors.any? %>
+
     <div style="color: red">
       <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
 

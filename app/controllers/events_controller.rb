@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
-
   # GET /events or /events.json
   def index
     @events = Event.all
@@ -70,4 +69,12 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :description, :start_date, :location, :price, :duration, :admin_id)
     end
+
+    def check_if_admin
+      unless current_user == @event.admin_id
+        redirect_to event_path(@event.id), notice: "You can't edit this event."
+      end
+    end
+
+
 end

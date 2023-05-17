@@ -72,13 +72,20 @@ end
 
 gem "dockerfile-rails", ">= 1.2", :group => :development
 
+# Faker for generating fake data
 gem "faker", "~> 3.2"
 
-
+# MailJet for sending emails
 gem "mailjet", "~> 1.7"
 
+# Dotenv for environment variables
 gem "dotenv-rails", "~> 2.8"
 
+# Devise for authentication
 gem "devise", "~> 4.9"
 
+# Letter opener for viewing emails in development
 gem "letter_opener", "~> 1.8"
+
+# Stripe for processing payments
+gem "stripe", "~> 8.5"

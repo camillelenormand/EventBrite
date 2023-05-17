@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  
   # Associations
   has_many :attendances
   has_many :users, through: :attendances

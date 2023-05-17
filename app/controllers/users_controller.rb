@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :check_if_current_user
+  before_action :check_if_admin
 
   # GET /users or /users.json
   def index
@@ -99,4 +100,12 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
+
+    def check_if_admin
+      unless current_user == @user
+        flash[:danger] = "You can't edit this profile."
+        redirect_to root_path
+      end
+    end
+
 end

@@ -11,11 +11,13 @@ class AttendancesController < ApplicationController
   # GET /attendances/1 or /attendances/1.json
   def show
     @attendance = Attendance.find(params[:id])
+    @event = Event.find(@attendance.event_id)
   end
 
   # GET /attendances/new
   def new
     @attendance = Attendance.new
+    @event = Event.find(params[:event_id])
   end
 
   # GET /attendances/1/edit
@@ -68,6 +70,6 @@ class AttendancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def attendance_params
-      params.fetch(:attendance, {})
+      params.require(:attendance).permit(:stripe_customer_id, :event_id, :user_id)
     end
 end
