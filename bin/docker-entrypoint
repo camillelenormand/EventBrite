@@ -1,17 +1,26 @@
 #! /bin/bash
-bundle exec rake db:exists; DB_EXISTS=$?; [[ $DB_EXISTS = 1 ]] && (rails db:create db:migrate db:seed) || (rails db:migrate)
 
-if [[ $? != 0 ]]; then
-  echo
+# Check if the database exists
+bundle exec rake db:exists
+DB_EXISTS=$?
+
+# Create, migrate, and seed the database if it doesn't exist
+if [[ $DB_EXISTS -eq 1 ]]; then
+  rails db:create db:migrate db:seed
+else
+  rails db:migrate
+fi
+
+# If migration fails, run setup
+if [[ $? -ne 0 ]]; then
   echo "== Failed to migrate. Running setup first."
-  echo
   bundle exec rake db:setup
 fi
 
-# Execute the given or default command:
+# Execute the given or default command
 exec "$@"
 
-# If running the rails server then create or migrate existing database
+# If running the rails server, create or migrate the existing database
 if [ "${*}" == "./bin/rails server" ]; then
   ./bin/rails db:create
   ./bin/rails db:prepare
