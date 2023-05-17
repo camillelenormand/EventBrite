@@ -8,6 +8,7 @@
   <%= form_with url: user_path, method: :get do |form| %>
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row mb-4">
+    
       <div class="col">
         <div class="form-outline">
           <%= form.text_field :first_name, value: @user.first_name, readonly:true, class: "form-control" %>
@@ -16,6 +17,7 @@
           <% end %>
         </div>
       </div>
+
       <div class="col">
         <div class="form-outline">
           <%= form.text_field :last_name, value: @user.last_name, readonly:true, class: "form-control" %>

@@ -21,6 +21,25 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
+
+    unless current_user == @user
+      redirect_to root_path
+    end
+
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    unless current_user == @user
+      redirect_to user_path(@user.id), notice: "You can't edit this profile."
+    end
+
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: "Your profile has been updated."
+    end
+
   end
 
   # POST /users or /users.json
@@ -69,7 +88,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:first_name,:last_name,:description,:email)
     end
 
     private
