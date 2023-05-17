@@ -55,7 +55,7 @@
 
   <!--Event List -->
   <h3>Events organized by <%=@user.first_name%></h3>
-  <% @events.all.sort.each_with_index do | event, index |%>
+  <% @events.all.each_with_index do | event, index |%>
     <div class="form-outline mb-4">
       <ul class="list-group list-group-light list-group-small">
         <li class="list-group-item"><%=event.title%></li>
