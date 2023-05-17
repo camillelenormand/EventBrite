@@ -1,62 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="card-body">
-  <h1>My profile</h1>
+  <h1 class="mb-4">My profile</h1>
+    <div class="col form-outline mb-4">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User Options
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "Back to users", users_path, class:"dropdown-item" %>
+            <%= link_to "Edit this user", edit_user_path(@user), class: "dropdown-item" %>
+            <%= link_to "Edit email or password", edit_user_registration_path,  class: "dropdown-item" %>
+            <%= button_to "Delete my account", @user , class:"dropdown-item", method: :delete %>
+          </div>
+      </div>
+    </div>
   <%= render @user %>
-  <%= link_to "Back to users", users_path, class:"btn-block mb-4" %><br>
 
-  <%= form_with url: user_path, method: :get do |form| %>
-    <!-- 2 column grid layout with text inputs for the first and last names -->
-    <div class="row mb-4">
-    
-      <div class="col">
-        <div class="form-outline">
-          <%= form.text_field :first_name, value: @user.first_name, readonly:true, class: "form-control" %>
-          <%= form.label :first_name, class: "form-label" do %>
-            First name
-          <% end %>
-        </div>
-      </div>
 
-      <div class="col">
-        <div class="form-outline">
-          <%= form.text_field :last_name, value: @user.last_name, readonly:true, class: "form-control" %>
-          <%= form.label :last_name, class: "form-label" do %>
-            Last name
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <!-- Text input -->
-    <div class="form-outline mb-4">
-      <%= form.text_field :description, value: @user.description, readonly:true, class: "form-control" %>
-      <%= form.label :description, class: "form-label" do %>
-        Description
-      <% end %>
-    </div>
-
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-      <%= form.email_field :email, value: @user.email, readonly:true, class: "form-control" %>
-      <%= form.label :email, class: "form-label" do %>
-        Email
-      <% end %>
-    </div>
-
-    <!-- Submit button -->
-    <div class="form-outline mb-4">
-      <%= link_to "Edit this user", edit_user_path(@user), class: "btn btn-primary btn-block mb-4" %><br>
-      <%= link_to "Edit email or password", edit_user_registration_path,  class: "btn btn-info btn-block mb-4" %><br>
-      <%= button_to "Delete my account", @user , class:"btn btn-danger btn-block mb-4", method: :delete %><br>
-    </div>
-
-  <% end %>
 
   <!--Event List -->
   <h3>Events organized by <%=@user.first_name%></h3>
   <% @events.all.each_with_index do | event, index |%>
-    <div class="form-outline mb-4">
+    <div class="col form-outline mb-4">
       <ul class="list-group list-group-light list-group-small">
         <li class="list-group-item"><%=event.title%></li>
         <li class="list-group-item"><%=link_to "Details", event_path(event.id)%></li>
