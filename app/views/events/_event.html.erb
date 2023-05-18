@@ -1,12 +1,31 @@
 <div id="<%= dom_id event %>">
+  <h1><%= event.title %></h1>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><%=event.title%></h5>
       <p class="card-text">About: <%=event.description%></p>
       <p class="card-text">Date: <%=event.start_date.strftime("%Y-%m-%d %H:%M:%S")%></p>
       <p class="card-text">Location: <%=event.location%></p>
-      <p class="card-text">Price: €<%=event.price%></p>
-      <p class="card-text">Duration: <%=event.duration%> minutes</p>
+      <p class="card-text">Price: €<%=number_to_currency(event.price)%></p>
     </div>
+    <% if event.event_picture.attached?%>
+      <div style='height:200px;width:200px' class="card-text">
+      <%= image_tag event.event_picture, class: "card-img-top" %>
+      </div>
+    <% else %>
+      <div style='height:50px;width:50px' class="card-text">
+      <%= image_tag "image-not-found-icon.png", alt:"image", class: "card-img-top" %>
+      </div>
+    <% end %>
   </div>
+  <h2>Attendances</h2>
+    <% if event.attendances.any? %>
+      <ul>
+        <% event.attendances.each do | attendance | %>
+          <li><%= attendance.user.email %></li>
+          <% end %>
+      </ul>
+    <% else %>
+    <p> No attendances yet</p>
+    <% end %>
+
 </div>

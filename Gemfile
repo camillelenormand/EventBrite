@@ -89,3 +89,7 @@ gem "letter_opener", "~> 1.8"
 
 # Stripe for processing payments
 gem "stripe", "~> 8.5"
+
+gem "image_processing", "~> 1.12"
+
+gem "mini_magick", "~> 4.12"

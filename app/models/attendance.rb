@@ -5,7 +5,8 @@ class Attendance < ApplicationRecord
   belongs_to :event
 
   # Validations
-  validates :stripe_customer_id, presence: true
+  validates :user_id, presence: true
+  validates :event_id, presence: true
 
   def attendance_send
     AttendanceMailer.attendance_email(self).deliver_now

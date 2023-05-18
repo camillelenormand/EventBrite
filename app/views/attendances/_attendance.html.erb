@@ -1,2 +1,7 @@
 <div id="<%= dom_id attendance %>">
+    <div class="card-body">
+      <p><%= @attendance.user.first_name %> <%= attendance.user.last_name %></p>
+      <p><%= @attendance.user.email ? @attendance.user.email : "Not mentionned" %></p>
+      <p><%= @attendance.user.description ? @attendance.user.description : "Not mentionned" %></p>
+    </div>
 </div>

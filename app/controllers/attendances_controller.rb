@@ -10,14 +10,13 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/1 or /attendances/1.json
   def show
-    @attendance = Attendance.find(params[:id])
-    @event = Event.find(@attendance.event_id)
+
   end
 
   # GET /attendances/new
   def new
+  
     @attendance = Attendance.new
-    @event = Event.find(params[:event_id])
   end
 
   # GET /attendances/1/edit
@@ -26,7 +25,10 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
+    @event = Event.find(params[:event_id])
+    @user = User.find(current_user.id)
+
+    @attendance = Attendance.new(user_id: @user.id, event_id: @event.id)
 
     respond_to do |format|
       if @attendance.save
@@ -70,6 +72,6 @@ class AttendancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def attendance_params
-      params.require(:attendance).permit(:stripe_customer_id, :event_id, :user_id)
+      params.require(:attendance).permit(:stripe_customer_id, :event_id, :user_id, :stripe_checkout_session_id)
     end
 end
