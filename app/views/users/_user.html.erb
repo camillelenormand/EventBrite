@@ -2,6 +2,15 @@
   <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%=@user.first_name%> <%=@user.last_name%></h5>
+        <% if user.avatar.attached?%>
+          <div style='height:200px;width:200px' class="card-text">
+          <%= image_tag user.avatar, class: "card-img-top" %>
+          </div>
+        <% else %>
+          <div style='height:50px;width:50px' class="card-text">
+          <%= image_tag "image-not-found-icon.png", alt:"image", class: "card-img-top" %>
+          </div>
+        <% end %>
         <p class="card-text">Email: <%=@user.email%></p>
         <p class="card-text">Description: <%=@user.description%></p>
       </div>

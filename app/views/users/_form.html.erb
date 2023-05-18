@@ -32,6 +32,13 @@
       <% end %>
    </div>
 
+    <div class="form-outline">
+     <%= form.file_field :avatar%>
+      <%= form.label :avatar, class: "form-label" do %>
+        Profile Picture
+      <% end %>
+    </div>
+
 
   
   <% if user.errors.any? %>
