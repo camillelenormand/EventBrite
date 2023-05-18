@@ -1,4 +1,6 @@
 <%= form_with(model: attendance) do |form| %>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
 
   <% if attendance.errors.any? %>
 
@@ -14,6 +16,6 @@
   <% end %>
 
   <div>
-    <%= form.submit %>
+      <%= f.submit "Register and Pay", class: "btn btn-primary" %>
   </div>
 <% end %>

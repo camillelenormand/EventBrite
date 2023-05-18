@@ -1,0 +1,6 @@
+<div class="container text-center my-5">
+  <h1>Success!</h1>
+  <p>Thank you for your purchase.</p>
+  <p>Your payment has been processed successfully:<%=@payment_intent_status%></p>
+  <p><%= link_to "Go back", event_path(@event.id) %></p>
+</div>
