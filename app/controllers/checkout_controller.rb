@@ -1,6 +1,13 @@
 class CheckoutController < ApplicationController
+  
+  include CheckoutHelper
+  include StripeServices
 
+  before_action :authenticate_user!
+  
   def create
+    @user = current_user
+    @event = params[:event_id]
     @total = params[:total].to_d
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -10,7 +17,7 @@ class CheckoutController < ApplicationController
             currency: 'eur',
             unit_amount: (@total*100).to_i,
             product_data: {
-              name: 'Rails Stripe Checkout',
+              name: "Stripe payment",
             },
           },
           quantity: 1
@@ -20,6 +27,11 @@ class CheckoutController < ApplicationController
       success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: checkout_cancel_url, 
     )
+
+    stripe_customer_id = create_stripe_customer(current_user.email)
+    current_user.update(stripe_id: stripe_customer_id)
+    create_attendee(current_user.id, @event)
+
     redirect_to @session.url, allow_other_host: true
   end
 

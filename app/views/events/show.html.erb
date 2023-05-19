@@ -3,6 +3,6 @@
   <%= link_to "Back to events", events_path %>
   <%= render @event %>
   <div class="container p-4">
-      <%= button_to "Book", new_event_attendance_path(@event.id), method: :get, class: "btn btn-primary", data: {turbo: false} %><br>
+      <%= button_to "Book", checkout_create_path(event_id: @event.id, total:@event.price), class: "btn btn-primary", data: {turbo: false} %><br>
       <%= button_to "Delete this event", @event, method: :delete, class:"btn btn-danger " %>
   </div>

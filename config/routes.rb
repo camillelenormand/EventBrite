@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # Define routes for the Devise gem
   devise_for :users
 
-  resources :attendances, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :attendances, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  end
 
   # Define routes for the Event and Attendance models
   resources :events do

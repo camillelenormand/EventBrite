@@ -1,4 +1,7 @@
 <div class="container text-center my-5">
-  <h1>Your payment was cancelled.</h1>
-  <p>Please try again.</p>
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Payment Cancelled</h4>
+    <p>Please try again.</p>
+  </div>
+  <%= link_to "Back to Events", root_path, class: "btn btn-primary" %>
 </div>
