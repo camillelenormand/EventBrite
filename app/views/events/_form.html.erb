@@ -60,6 +60,11 @@
     <%= form.hidden_field :admin_id, value: current_user.id %> 
   </div>
 
+  <!-- Validation -->
+  <div class="form-outline mb-4">
+    <%= form.hidden_field :validated, value: nil %>
+  </div>
+
   <!-- Picture -->
   <div class="form-outline mb-4">
     <%= form.file_field :event_picture, class: "form-control" %>

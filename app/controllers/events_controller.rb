@@ -1,15 +1,16 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :is_admin?, only: [:edit, :update, :destroy]
+  before_action :is_validated?, only: [:show, :create]
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.where(validated: true)
   end
 
   # GET /events/1 or /events/1.json
   def show
-    @event = Event.find(params[:id])
     @attendances = Attendance.where(event_id: @event.id)
   end
 
@@ -62,20 +63,25 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def is_admin?
+    unless current_user == @event.admin_id
+      redirect_to event_path(@event.id), notice: "You can't edit this event."
+    end
+  end
+
+  def is_validated?
+    if params[:id]
       @event = Event.find(params[:id])
+      redirect_to root_path, notice: "This event is not validated yet." unless @event.validated
     end
+  end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:title, :description, :start_date, :location, :price, :duration, :admin_id, :event_picture)
-    end
-
-    def check_if_admin
-      unless current_user == @event.admin_id
-        redirect_to event_path(@event.id), notice: "You can't edit this event."
-      end
-    end
-
-
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:title, :description, :start_date, :location, :price, :duration, :admin_id, :event_picture, :validated)
+  end
 end

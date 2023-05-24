@@ -1,4 +1,3 @@
-# Purpose: Controller for the Attendance model. It allows to create, read, update and destroy attendances.
 class AttendancesController < ApplicationController
   include AttendancesHelper
 
@@ -21,7 +20,6 @@ class AttendancesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    @attendances = Attendance.all
     @attendance = Attendance.new(event_id: @event.id, user_id: current_user.id)
 
     if @attendance.save

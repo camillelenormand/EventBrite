@@ -6,6 +6,7 @@
       <p class="card-text">Date: <%=event.start_date.strftime("%Y-%m-%d %H:%M:%S")%></p>
       <p class="card-text">Location: <%=event.location%></p>
       <p class="card-text">Price: €<%=number_to_currency(event.price)%></p>
+      <p class="card-text">Status: <%=event.validated%></p>
     </div>
     <% if event.event_picture.attached?%>
       <div style='height:200px;width:200px' class="card-text">

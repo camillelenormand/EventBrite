@@ -1,11 +1,12 @@
 class CheckoutController < ApplicationController
-  
   include CheckoutHelper
   include StripeServices
-
   before_action :authenticate_user!
-  
+
   def create
+    redirect_to event_path(params[:event_id]), alert: "You are already registered to this event" and return if is_event_attendee?(params[:event_id], current_user)
+    redirect_to event_path(params[:event_id]), alert: "You can't register to your own event" and return if is_admin?(params[:event_id], current_user)
+
     @user = current_user
     @event = params[:event_id]
     @total = params[:total].to_d
@@ -41,7 +42,5 @@ class CheckoutController < ApplicationController
   end
 
   def cancel
-  
   end
-
 end
