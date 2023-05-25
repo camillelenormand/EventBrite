@@ -1,2 +1,96 @@
-<h1> Administration Dashboard </h1>
- <% render 'tabs' %>
+<h1 class="text-center p-5"> Administration Dashboard </h1>
+<ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="users">
+    <a
+      class="nav-link active"
+      id="ex1-tab-1"
+      data-mdb-toggle="tab"
+      href="#ex1-tabs-1"
+      role="tab"
+      aria-controls="ex1-tabs-1"
+      aria-selected="true"
+      >Events</a
+    >
+  </li>
+  <li class="nav-item" role="events">
+    <a
+      class="nav-link"
+      id="ex1-tab-2"
+      data-mdb-toggle="tab"
+      href="#ex1-tabs-2"
+      role="tab"
+      aria-controls="ex1-tabs-2"
+      aria-selected="false"
+      >Users</a
+    >
+  </li>
+</ul>
+
+<!-- Tabs content -->
+  <!-- Event tab -->
+<div class="tab-content" id="tab-events">
+  <div
+    class="tab-pane fade show active"
+    id="event-tab"
+    role="tabpanel"
+    data-bs-toggle="tab"
+  >
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Location</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <% @events.all.each_with_index do | event, index | %>
+      <tr>
+        <th scope="row"><%=index + 1%></th>
+        <td><%= event.title %></td>
+        <td><%= event.location %></td>
+        <td><%= event.start_date %></td>
+        <td><%= event.validated %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= button_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure to delete this event?' }, class:"btn btn-danger" %></td>
+        <td><%= button_to 'Validate', event_path(event), method: :patch, data: { confirm: 'Are you sure to confirm this event?' }, class: "btn btn-success" %></td>
+        <td><%= button_to 'Reject', event_path(event), method: :patch, data: { confirm: 'Are you sure? to confimr this event' }, class: "btn btn-warning" %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+  
+  <!-- User tab -->
+  <div class="tab-pane fade" id="tab-users" role="tabpanel" aria-labelledby="ex1-tab-2">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <% @users.each_with_index do | user, index | %>
+      <tr>
+        <th scope="row"><%=index%></th>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.description %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+</div>
